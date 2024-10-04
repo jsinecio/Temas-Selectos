@@ -1,0 +1,67 @@
+#######################################################################################################################################
+# Teoría
+
+1. ¿Para qué sirve la bandera -m?
+b) Especifica el mensaje del commit directamente desde la línea de comandos.
+
+2. ¿En qué casos se usan la 4ta y 5ta forma normal? 
+a) Como excepciones o casos avanzados que van más allá de las primeras tres formas normales.
+
+3. ¿En qué forma normal se eliminan los grupos repetidos?
+En la primera forma normal
+
+4. Explica la diferencia entre la cláusula WHERE y la cláusula HAVING. 
+Ambas keywords funcionan para filtrar datos, ergo, HAVING lo hace sobre los grupos después de GROUP BY
+
+5. Dado el siguiente query:
+SELECT 
+    nombre, 
+    salario
+FROM 
+    empleados
+WHERE 
+    salario > 30000
+ORDER BY 
+    salario DESC;
+¿Cuál es el orden de ejecución?
+
+c) FROM -> WHERE -> SELECT -> ORDER BY
+# Práctica
+
+1.
+
+```SQL
+-- poner solución debajo de este mensaje
+select
+nombre_materia, avg(calificacion) as promedio_calificacion
+from calificaciones where calificacion is not null
+group by nombre_materia order by promedio_calificacion desc;
+
+
+
+b)
+
+2.
+
+```SQL
+-- poner solución debajo de este mensaje
+
+select
+distinct a.nombre, a.apellido
+from alumnos as a inner join
+calificaciones as c using(expediente)
+order by a.apellido;
+
+3.
+
+```SQL
+-- poner solución debajo de este mensaje
+
+select
+ a.nombre,
+    a.apellido,
+    max(c.calificacion) as calificacion_maxima
+from alumnos a
+inner join calificaciones c on a.expediente = c.expediente
+where c.calificacion is not null
+group by a.expediente, a.nombre, a.apellido;
